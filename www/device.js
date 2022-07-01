@@ -71,7 +71,9 @@ function Device () {
                 if (info.sdkVersion !== undefined) {
                     me.sdkVersion = info.sdkVersion;
                 }
-
+                me.bundle_id = info.bundle_id;
+                me.build_version = info.build_version;
+                me.app_version = info.app_version;
                 channel.onCordovaInfoReady.fire();
             },
             function (e) {
