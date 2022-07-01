@@ -86,7 +86,7 @@
 - (NSDictionary*)deviceProperties
 {
     UIDevice* device = [UIDevice currentDevice];
-
+    NSDictionary * infoDic = NSBundle.mainBundle.infoDictionary;
     return @{
              @"manufacturer": @"Apple",
              @"model": [device modelVersion],
@@ -95,7 +95,10 @@
              @"uuid": [self uniqueAppInstanceIdentifier:device],
              @"cordova": [[self class] cordovaVersion],
              @"isVirtual": @([self isVirtual]),
-             @"isiOSAppOnMac": @([self isiOSAppOnMac])
+             @"isiOSAppOnMac": @([self isiOSAppOnMac]),
+             @"app_version": [infoDic objectForKey:@"CFBundleShortVersionString"],
+             @"build_version": [infoDic objectForKey:@"CFBundleVersion"],
+             @"bundle_id": [infoDic objectForKey:@"CFBundleIdentifier"]
              };
 }
 
