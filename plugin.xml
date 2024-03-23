@@ -97,6 +97,6 @@
         <header-file src="src/osx/CDVDevice.h" />
         <source-file src="src/osx/CDVDevice.m" />
     </platform>
-    <dependency id="cordova-plugin-ios-keychain" version="2.0.0" />
+    <dependency id="cordova-plugin-ios-keychain" version="3.0.1" />
 
 </plugin>
