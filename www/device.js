@@ -71,8 +71,27 @@ function Device () {
                 if (info.sdkVersion !== undefined) {
                     me.sdkVersion = info.sdkVersion;
                 }
-
-                channel.onCordovaInfoReady.fire();
+                me.bundle_id = info.bundle_id;
+                me.build_version = info.build_version;
+                me.app_version = info.app_version;
+                Keychain.get(function (v){
+                    console.log("Keychain get success",v);
+                    if(v){
+                        me.uuid = v;
+                        channel.onCordovaInfoReady.fire();
+                    }else{
+                        Keychain.set(function (){
+                            console.log("Keychain set success");
+                            channel.onCordovaInfoReady.fire();
+                        }, function (err){
+                            console.log("Keychain set fail",err);
+                            channel.onCordovaInfoReady.fire();
+                        }, 'uuid', me.uuid, false);
+                    }
+                }, function (err){
+                    console.log("Keychain get fail",err);
+                    channel.onCordovaInfoReady.fire();
+                }, 'uuid');
             },
             function (e) {
                 me.available = false;
